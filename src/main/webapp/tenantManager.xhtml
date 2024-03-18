@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+        <style>
+            .div-input {
+                margin-bottom: 15px
+            }
+
+            .input-label {
+                font-weight: bold
+            }
+        </style>
+
+    </h:head>
+
+    <h:body>
+
+        <h:form>
+
+            <p:panel header="Gerenciar Inquilinos">
+
+                <h:panelGrid columns="1" style="margin-bottom: 10px">
+
+                    <div class="div-input">
+                        <p:outputLabel value="Nome:" class="input-label"/>
+                        <p:inputText value="#{tenantManager.tenant.name}"/>
+                    </div>
+
+                    <div class="div-input">
+                        <p:outputLabel value="Telefone:" class="input-label"/>
+                        <p:inputMask value="#{tenantManager.tenant.phone}" mask="(99) 99999-9999"/>
+                    </div>
+
+                    <h:panelGrid columns="2">
+
+                        <p:commandButton value="Pesquisar" update="@form" actionListener="#{tenantManager.findByAll()}"/>
+                        <p:button value="Voltar" href="index.xhtml" />
+
+                    </h:panelGrid>
+
+                </h:panelGrid>
+
+                <p:dataTable value="#{tenantManager.tenants}" var="tenant">
+
+                    <p:column headerText="Ações">
+                        <p:button icon="pi pi-pencil" href="updateTenant.xhtml?edit=#{tenant.id}"/>
+                    </p:column>
+
+                    <p:column headerText="Nome">
+                        <p:outputLabel value="#{tenant.name}"/>
+                    </p:column>
+
+                    <p:column headerText="Telefone">
+                        <p:outputLabel value="#{tenant.phone}"/>
+                    </p:column> 
+
+                    <p:column headerText="Apartamento">
+                        <p:outputLabel value="#{tenant.apartment.number}"/>
+                    </p:column>
+
+                </p:dataTable>
+
+            </p:panel>
+
+        </h:form>
+
+    </h:body>
+</html>

@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <a href="student.xhtml"></a>
+    <h:head>
+        <title>Facelet Title</title>
+        <style>
+            .div-input {
+                margin-bottom: 15px
+            }
+
+            .input-label {
+                font-weight: bold
+            }
+        </style>
+
+    </h:head>
+
+    <h:body>
+
+        <h:form>
+
+            <p:panel header="Cadastro de Inquilino">
+
+                <p:growl id="growl" showDetail="false" />
+
+                <h:panelGrid columns="1">           
+
+                    <div class="div-input">
+                        <p:outputLabel value="Nome:" class="input-label"/>
+                        <p:inputText value="#{tenantManager.tenant.name}"/>
+                    </div>
+                    
+                    <div class="div-input">
+                        <p:outputLabel value="Gênero:" class="input-label"/>
+                        <p:selectOneRadio id="gender" value="#{tenantManager.tenant.gender}" layout="lineDirection">
+                            <f:selectItem itemLabel="Masculino" itemValue="Masculino"/>
+                            <f:selectItem itemLabel="Feminino" itemValue="Feminino"/>
+                        </p:selectOneRadio>
+                    </div>
+
+                    <div class="div-input">
+                        <p:outputLabel value="Tefefone:" class="input-label"/>
+                        <p:inputMask value="#{tenantManager.tenant.phone}" mask="(99) 99999-9999" />
+                    </div>
+
+                    <h:panelGrid columns="2" >
+                        <p:commandButton value="Atualizar" update="@form" actionListener="#{tenantManager.update()}"/>
+                        <p:commandButton value="Remover" update="@form" actionListener="#{tenantManager.remove()}"/>
+                    </h:panelGrid>
+
+                </h:panelGrid>
+
+            </p:panel>
+
+        </h:form>
+
+    </h:body>
+</html>

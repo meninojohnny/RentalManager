@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <style>
+            .div-input {
+                margin-bottom: 15px
+            }
+
+            .input-label {
+                font-weight: bold
+            }
+        </style>
+
+    </h:head>
+
+    <h:body>
+
+        <h:form>
+
+            <p:panel header="Gerenciar Apartamentos">
+
+                <div style="display: flex; align-items: end">
+
+                    <div style="margin-right: 20px">
+
+                        <h:panelGrid columns="1">
+
+                            <div class="div-input">
+                                <p:outputLabel value="N° do Ap:" class="input-label"/>
+                                <p:inputText value="#{apartmentManager.apartment.number}"/>
+                            </div>
+
+                            <div class="div-input">
+                                <p:outputLabel value="N° de quartos:" class="input-label"/>
+                                <p:inputText value="#{apartmentManager.apartment.quantityRooms}"/>
+                            </div>
+
+                        </h:panelGrid>
+
+                    </div>
+
+                    <div style="margin-right: 20px">
+
+                        <h:panelGrid columns="1">                        
+
+                            <div class="div-input">
+                                <p:outputLabel value="Preço:" class="input-label"/>
+                                <p:inputText value="#{apartmentManager.apartment.price}"/>
+                            </div>
+
+                            <div class="div-input">
+                                <p:outputLabel value="Bairro:" class="input-label"/>
+                                <p:inputText value="#{apartmentManager.apartment.adress.neighborhood}"/>
+                            </div>
+
+                        </h:panelGrid>   
+
+                    </div>
+
+                    <div>
+                        <h:panelGrid columns="1">
+                            <div class="div-input">
+                                <p:outputLabel value="Disponivel:" class="input-label"/>
+                                <p:selectOneRadio id="available" value="#{apartmentManager.apartment.isAvailable}" layout="lineDirection">
+                                    <f:selectItem itemLabel="Todos" itemValue="#{null}"/>
+                                    <f:selectItem itemLabel="Sim" itemValue="#{true}"/>
+                                    <f:selectItem itemLabel="Não" itemValue="#{false}"/>
+                                </p:selectOneRadio>
+                            </div>  
+                        </h:panelGrid>
+                    </div>
+
+                </div>
+
+                <h:panelGrid columns="2" style="margin-bottom: 10px">
+                    <p:commandButton value="Pesquisar" update="@form" actionListener="#{apartmentManager.findByAll()}"/>
+                    <p:button value="Voltar" href="index.xhtml" />
+                </h:panelGrid>
+
+                <p:dataTable value="#{apartmentManager.apartments}" var="apartment">
+
+                    <p:column headerText="Ações">
+                        <p:button icon="pi pi-pencil" href="updateApartment.xhtml?edit=#{apartment.id}"/>
+                    </p:column>
+
+                    <p:column headerText="N° do Ap">
+                        <p:outputLabel value="#{apartment.number}"/>
+                    </p:column>
+
+                    <p:column headerText="N° de quartos">
+                        <p:outputLabel value="#{apartment.quantityRooms}"/>
+                    </p:column>
+
+                    <p:column headerText="Preço">
+                        <p:outputLabel value="#{apartment.price}"/>
+                    </p:column>
+
+                    <p:column headerText="Bairro">
+                        <p:outputLabel value="#{apartment.adress.neighborhood}"/>
+                    </p:column>
+
+                    <p:column headerText="Disponivel">
+                        <p:outputLabel value="#{apartmentManager.isAvailableFormated(apartment.isAvailable)}"/>
+                    </p:column>
+
+                </p:dataTable>
+
+            </p:panel>
+
+        </h:form>
+
+    </h:body>
+</html>
