@@ -3,7 +3,6 @@ package com.johnny.manager;
 import com.johnny.model.Tenant;
 import com.johnny.service.TenantService;
 import com.johnny.utilitarie.Message;
-import com.johnny.utilitarie.PageUtil;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
